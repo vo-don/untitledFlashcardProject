@@ -1,25 +1,18 @@
 #include <cards.h>
 #include <string>
 #include <algorithm>
+#include <QDateTime>
+#include <cstdlib> // For strtoul
 
 using namespace std;
 
-struct Card
-{
-    std::string key;
-    std::string value;
-
-    size_t index;
-
-    size_t daysUntilNext;
-
-};
+string DEFAULT_TIME = "0000-00-00";
 
 Deck::Deck() {}
 
 void Deck::addCard(const std::string& key, const std::string& value)
 {
-    Card newCard = {key, value, cards.size(), 0}; // figure out how to initialize a default Qt date value
+    Card newCard = {key, value, cards.size(), QDateTime::currentDateTime()};
     cards.push_back(newCard);
 }
 
@@ -31,8 +24,11 @@ void Deck::removeCard(size_t index)
 
 void Deck::removeCard(const std::string& keyOrValue)
 {
-    auto it = find_if(cards.begin(), cards.end(), [&] (const Card& card) {
-        return card.daysUntilNext == keyOrValue || card.value == keyOrValue; // lambda function to find card by value
+    size_t keyOrValueSizeT = strtoul(keyOrValue.c_str(), nullptr, 10);
+
+    auto it = find_if(cards.begin(), cards.end(), [&] (const Card& card)
+    {
+        return card.daysUntilNext == keyOrValueSizeT || card.value == keyOrValue; // lambda function to find card by value
     });
 
     if (it != cards.end()) // if found
@@ -48,7 +44,7 @@ void Card::addDaysUntilNext(const size_t days)
     daysUntilNext += days;
 }
 
-void Card::setDateAdded(const Qt::DateFormat date)
+void Card::setDateAdded(const QDateTime date)
 {
     dateAdded = date;
 }

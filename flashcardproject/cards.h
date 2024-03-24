@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <Qt>
+#include <QDateTime>
 
 struct Card
 {
@@ -13,12 +13,12 @@ struct Card
 
     size_t daysUntilNext = 0;
 
-    Qt::DateFormat dateAdded;
+    QDateTime dateAdded;
 
     size_t getDaysUntilNext() const;
     void addDaysUntilNext(size_t days);
 
-    void setDateAdded(Qt::DateFormat date);
+    void setDateAdded(QDateTime date);
 
     // Implement a date class in order to make a date created variable
 };
