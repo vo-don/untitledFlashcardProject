@@ -15,7 +15,8 @@ SOURCES += \
 
 HEADERS += \
     cards.h \
-    mainwindow.h
+    mainwindow.h \
+    menuWindow.h
 
 FORMS += \
     mainwindow.ui

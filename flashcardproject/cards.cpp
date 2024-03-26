@@ -1,5 +1,5 @@
 #include <cards.h>
-#include <string>
+//#include <string> string is already included in the header file
 #include <algorithm>
 #include <QDateTime>
 #include <cstdlib> // For strtoul
@@ -8,7 +8,14 @@ using namespace std;
 
 string DEFAULT_TIME = "0000-00-00";
 
-Deck::Deck() {}
+Deck::Deck(string& name) : name(name), cards() {}
+
+Deck::Deck(string& name, const vector<Card>& initialCards) : name(name), cards(initialCards) {}
+
+void createNewDeck(string name)
+{
+    Deck newDeck = new Deck(name);
+}
 
 void Deck::addCard(const std::string& key, const std::string& value)
 {
@@ -26,8 +33,7 @@ void Deck::removeCard(const std::string& keyOrValue)
 {
     size_t keyOrValueSizeT = strtoul(keyOrValue.c_str(), nullptr, 10);
 
-    auto it = find_if(cards.begin(), cards.end(), [&] (const Card& card)
-    {
+    auto it = find_if(cards.begin(), cards.end(), [&] (const Card& card) {
         return card.daysUntilNext == keyOrValueSizeT || card.value == keyOrValue; // lambda function to find card by value
     });
 
