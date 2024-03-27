@@ -26,7 +26,7 @@ struct Card
 class Deck
 {
 public:
-    Deck(const std::string name, std::vector<Card>& initialCards);
+    Deck(const std::string& name, const std::vector<Card>& cards);
 
     void addCard(const std::string& key, const std::string& value);
     void removeCard(size_t index);

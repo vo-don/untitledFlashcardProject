@@ -8,13 +8,13 @@ using namespace std;
 
 string DEFAULT_TIME = "0000-00-00";
 
-Deck::Deck(string& name) : name(name), cards() {}
+vector<Card> emptyDeck;
 
-Deck::Deck(string& name, const vector<Card>& initialCards) : name(name), cards(initialCards) {}
+Deck::Deck(const std::string& name, const std::vector<Card>& cards) : name(name), cards(cards) {}
 
-void createNewDeck(string name)
+void createNewDeck(string name, vector<Card> initialDeck)
 {
-    Deck newDeck = new Deck(name);
+    Deck newDeck(name, initialDeck); // not Deck newDeck = new Deck(name, initialDeck) because new creates a pointer to the object instead
 }
 
 void Deck::addCard(const std::string& key, const std::string& value)
